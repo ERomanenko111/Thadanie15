@@ -1,11 +1,11 @@
 package com.example.restdemo.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 public class Person {
@@ -17,14 +17,6 @@ public class Person {
     private String lastname;
     private LocalDate birthday;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    List<Message> messages;
-
-    @JsonIgnore
-    public List<Message> getMessages() {
-        return messages;
-    }
-
     public Person() {
     }
 
@@ -35,17 +27,12 @@ public class Person {
         this.birthday = birthday;
     }
 
-    public Person(int id, String firstname, String surname, String lastname, LocalDate birthday, List<Message> messages) {
+    public Person(int id, String firstname, String surname, String lastname, LocalDate birthday) {
         this.id = id;
         this.firstname = firstname;
         this.surname = surname;
         this.lastname = lastname;
         this.birthday = birthday;
-        this.messages = messages;
-    }
-
-    public void addMessage(Message message) {
-        messages.add(message);
     }
 
     public int getId() {
